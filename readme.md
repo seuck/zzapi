@@ -1,31 +1,41 @@
-# Lumen PHP Framework
+# Zzapi: JSON API for Zzap! and other magazines
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://poser.pugx.org/laravel/lumen-framework/d/total.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/lumen-framework/v/stable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/lumen-framework/v/unstable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://poser.pugx.org/laravel/lumen-framework/license.svg)](https://packagist.org/packages/laravel/lumen-framework)
+Zzapi is a RESTful API that exposes relevant informations contained in Zzap.it database in an easy to use JSON format.
+Even originally created for Zzap! magazine, it can be used to expose data bt every other Internet project that brought magazine scans online.
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+## Technical details
+- Based on [Laravel Lumen](https://lumen.laravel.com).
+- Please note: the database is not provided right now. An example DB for MySQL will be provided soon.
 
-## Official Documentation
+## Entities
 
-Documentation for the framework can be found on the [Lumen website](http://lumen.laravel.com/docs).
+- List of magazines:  
+/api/v1/magazine
 
-## Security Vulnerabilities
+- Details of a magazine, including issues information  
+/api/v1/magazine/1
 
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+- List of issued of a magazine  
+/api/v1/magazine/1/issue
+
+- Details of an issue of a magazine  
+/api/v1/magazine/1/issue/9
+
+- List of all editors of all magazines  
+/api/v1/editor
+
+- List of all editors of a magazine  
+/api/v1/editor/1
+
+- List of all contributors to issue scans  
+/api/v1/scan-author
+
+## Known clients using Zzapi
+- [Progetto Zzap! Italia](http://zzap.it)
+
+## Ruby on Rails version
+An old, unmaintained version written in RoR is available here: https://github.com/seuck/zzap-api
 
 ## License
 
 The Lumen framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
-
-## Entities
-
-/api/v1/magazine
-/api/v1/magazine/1
-/api/v1/magazine/1/issue
-/api/v1/magazine/1/issue/9
-/api/v1/editor
-/api/v1/editor/1
-/api/v1/scan-author
