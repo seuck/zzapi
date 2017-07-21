@@ -11,10 +11,6 @@
 |
 */
 
-$app->get('/', function () use ($app) {
-    return $app->version();
-});
-
 $app->group(['prefix' => 'api/v1'], function($app) {
     $app->get('magazine','MagazineController@index');
     $app->get('magazine/{id}','MagazineController@getMagazine');
@@ -27,3 +23,7 @@ $app->group(['prefix' => 'api/v1'], function($app) {
 
     $app->get('scan-author','ScanAuthorController@index');
 }); 
+
+$app->get('/', function() {
+    return view('webapp');
+});
