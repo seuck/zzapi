@@ -17,7 +17,7 @@ class IssueController extends Controller {
   }
 
   public function getIssue($idMagazine, $idIssue) {
-    $Issue  = Issue::with(['magazine', 'editor', 'volumes.scanAuthors', 'volumes.volumeType', 'volumes.pages', 'volumes.pages.scan'])->where('magazine_id', $idMagazine)->select($this->selectedFields)->find($idIssue);
+    $Issue  = Issue::with(['magazine', 'editor', 'volumes.scanAuthors', 'volumes.volumeType', 'volumes.pages', 'volumes.pages.scan', 'volumes.pages.content', 'volumes.pages.content'])->where('magazine_id', $idMagazine)->select($this->selectedFields)->find($idIssue);
     return response()->json($Issue);
   }
 }

@@ -13,5 +13,9 @@ class Page extends Model {
   public function scan() {
     return $this->belongsTo('App\Scan')->select('id', 'path');
   }
+
+  public function content() {
+    return $this->hasMany('App\Content')->select('id', 'page_id', 'content_type_id');
+  }
 }
 ?>
