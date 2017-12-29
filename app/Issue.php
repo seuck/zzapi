@@ -15,7 +15,7 @@ class Issue extends Model {
   }
 
   public function volumes() {
-    return $this->hasMany('App\Volume')->select(['id', 'volume_type_id', 'issue_id', 'label', 'pages_number'])->orderBy('label', 'asc');
+    return $this->hasMany('App\Volume')->select(['id', 'volume_type_id', 'issue_id', 'label', 'pages_number', 'pdf'])->orderBy('label', 'asc');
   }
 }
 ?>
