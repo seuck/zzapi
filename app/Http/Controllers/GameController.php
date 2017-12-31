@@ -26,18 +26,21 @@ class GameController extends Controller {
       'publisher',
       'setting',
       'perspective',
+      'adverts',
+      'adverts.page',
+      'adverts.page.scan',
       'versions',
       'versions.system',
       'versions.system.manufacturer',
       'versions.media',
       'versions.developer',
-      'versions.trick',
-      'versions.trick.trickType',
-      'versions.trick.page',
-      'versions.trick.page.scan',
-      'versions.review',
-      'versions.review.page',
-      'versions.review.page.scan'
+      'versions.tricks',
+      'versions.tricks.trickType',
+      'versions.tricks.page',
+      'versions.tricks.page.scan',
+      'versions.reviews',
+      'versions.reviews.page',
+      'versions.reviews.page.scan'
     ])->select($this->selectedFields)->find($idGame);
     return response()->json($Game);
   }

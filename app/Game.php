@@ -22,6 +22,10 @@ class Game extends Model {
     return $this->hasMany('App\Version')->select(['id', 'year', 'game_id', 'system_id', 'media_id', 'developer_id'])->orderBy('year');
   }
 
+  public function adverts() {
+    return $this->hasMany('App\Advert')->select(['id', 'volume_id', 'game_id', 'page_id']);
+  }
+
   public function genres() {
     return $this->belongsToMany('App\Genre', 'games_genres')->select('id', 'name')->orderBy('name');
   }

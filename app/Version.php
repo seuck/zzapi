@@ -22,11 +22,11 @@ class Version extends Model {
     return $this->belongsTo('App\Developer')->select('id', 'name');
   }
 
-  public function trick() {
+  public function tricks() {
     return $this->hasMany('App\Trick')->select('id', 'version_id', 'trick_type_id', 'volume_id', 'page_id');
   }
 
-  public function review() {
+  public function reviews() {
     return $this->hasMany('App\Review')->select('id', 'version_id', 'volume_id', 'page_id', 'vote');
   }
 }
