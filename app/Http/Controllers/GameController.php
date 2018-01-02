@@ -44,5 +44,26 @@ class GameController extends Controller {
     ])->select($this->selectedFields)->find($idGame);
     return response()->json($Game);
   }
+
+  public function findGame($gameName) {
+    if (strlen($gameName) >= 2) {
+      $ExactGames = Game::with(['publisher'])
+        ->select($this->selectedFields)
+        ->where('name', $gameName)
+        ->get();
+  
+      $SimilarGames = Game::with(['publisher'])
+        ->select($this->selectedFields)
+        ->where('name', 'like', '%'.$gameName.'%')
+        ->where('name', '!=', $gameName)
+        ->limit(50)
+        ->orderBy('name')
+        ->get();
+  
+      return response()->json($ExactGames->concat($SimilarGames));
+    }
+
+    return response()->json([]);
+  }
 }
 ?>

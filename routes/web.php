@@ -22,6 +22,11 @@ $app->group(['prefix' => 'api/v1'], function($app) {
     $app->get('editor/{id}','EditorController@getEditor');
 
     $app->get('scan-author','ScanAuthorController@index');
+
+    $app->get('game/{idGame}','GameController@getGame');
+    $app->get('game/find/{gameName}','GameController@findGame');
+
+    // $app->post('content','ContentController@createContent');
 }); 
 
 $app->get('/', function() {
