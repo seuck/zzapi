@@ -24,7 +24,8 @@ $app->group(['prefix' => 'api/v1'], function($app) {
     $app->get('scan-author','ScanAuthorController@index');
 
     $app->get('game/{idGame}','GameController@getGame');
-    $app->get('game/find/{gameName}','GameController@findGame');
+    $app->get('game/find/{gameName}','GameController@findGames');
+    $app->get('game/findMore/{gameName}','GameController@findMoreGames');
 
     // $app->post('content','ContentController@createContent');
 }); 

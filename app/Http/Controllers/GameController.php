@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 
 class GameController extends Controller {
   
+  const DEFAULT_LIMIT = 15;
+  const SAFE_LIMIT = 50;
+
   private $selectedFields = [
     'id',
     'name',
@@ -14,7 +17,7 @@ class GameController extends Controller {
     'setting_id',
     'perspective_id'
   ];
-  
+
   public function index() {
     $Games  = Game::select($this->selectedFields)->get();
     return response()->json($Games);
@@ -45,25 +48,55 @@ class GameController extends Controller {
     return response()->json($Game);
   }
 
-  public function findGame($gameName) {
+  public function findGames($gameName, $offset = 0, $limit = self::DEFAULT_LIMIT) {
+    $totalGames = 0;
+    $games = [];
+    $response = [];
+    
     if (strlen($gameName) >= 2) {
+      $totalGames = Game::query($this->selectedFields)
+        ->where('name', 'like', '%'.$gameName.'%')
+        ->count();
+
       $ExactGames = Game::with(['publisher'])
-        ->select($this->selectedFields)
-        ->where('name', $gameName)
-        ->get();
-  
+      ->select($this->selectedFields)
+      ->where('name', $gameName)
+      ->get();
+
+      $offset -= $ExactGames->count();
+      if ($offset < 0) {
+        $offset = 0;
+      }
+
+      if ($offset === 0) {
+        $limit -= $ExactGames->count();
+      }
+
+
       $SimilarGames = Game::with(['publisher'])
         ->select($this->selectedFields)
         ->where('name', 'like', '%'.$gameName.'%')
         ->where('name', '!=', $gameName)
-        ->limit(50)
+        ->offset($offset)
+        ->limit($limit)
         ->orderBy('name')
         ->get();
-  
-      return response()->json($ExactGames->concat($SimilarGames));
+
+      if ($offset > 0) {
+        $games = $SimilarGames;
+      } else {
+        $games = $ExactGames->concat($SimilarGames);
+      }
     }
 
-    return response()->json([]);
+    $response['totalEntries'] = $totalGames;
+    $response['games'] = $games;
+
+    return response()->json($response);
+  }
+
+  public function findMoreGames($gameName) {
+    return self::findGames($gameName, self::DEFAULT_LIMIT, self::SAFE_LIMIT);
   }
 }
 ?>
