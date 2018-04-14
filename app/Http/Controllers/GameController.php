@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
   
+use Log;
 use App\Game;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -19,6 +20,8 @@ class GameController extends Controller {
   ];
 
   public function index() {
+    Log::info('['.$this->logAPIPrefix. '] GameController:index');
+
     $Games  = Game::select($this->selectedFields)->get();
     return response()->json($Games);
   }
@@ -45,6 +48,9 @@ class GameController extends Controller {
       'versions.reviews.page',
       'versions.reviews.page.scan'
     ])->select($this->selectedFields)->find($idGame);
+
+    Log::info('['.$this->logAPIPrefix. '] GameController:getGame:'.$Game->name);
+
     return response()->json($Game);
   }
 
@@ -54,6 +60,8 @@ class GameController extends Controller {
     $response = [];
     
     if (strlen($gameName) >= 2) {
+      Log::info('['.$this->logAPIPrefix. '] GameController:findGames:'.$gameName);
+
       $totalGames = Game::query($this->selectedFields)
         ->where('name', 'like', '%'.$gameName.'%')
         ->count();
@@ -96,6 +104,8 @@ class GameController extends Controller {
   }
 
   public function findMoreGames($gameName) {
+    Log::info('['.$this->logAPIPrefix. '] GameController:findMoreGames');
+
     return self::findGames($gameName, self::DEFAULT_LIMIT, self::SAFE_LIMIT);
   }
 }
