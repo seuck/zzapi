@@ -30,6 +30,6 @@ $app->group(['prefix' => 'api/v1'], function($app) {
     // $app->post('content','ContentController@createContent');
 }); 
 
-$app->get('/', function() {
+$app->get('/{any:.*}', function() {
     return view('webapp');
 });

@@ -1,1 +1,1 @@
-/Users/antonio/Dev/zzap/frontend-stack/dist/webapp.html
+/Users/antonio/Dev/zzap/frontend-stack/public/webapp.html

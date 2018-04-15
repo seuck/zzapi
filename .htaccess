@@ -2,18 +2,18 @@
 Redirect 301 /forum https://www.zzap.it
 Redirect 301 /phpBB2 https://www.zzap.it
 Redirect 301 /phpBB3 https://www.zzap.it
-Redirect 301 /bovabyte.php https://www.zzap.it/#/speciali/bovabyte
-Redirect 301 /elite.htm https://www.zzap.it/#/speciali/elitesystems
-Redirect 301 /konix.htm https://www.zzap.it/#/speciali/konixmultisystem
-Redirect 301 /storia.htm https://www.zzap.it/#/speciali/leabbiamovistetutte
-Redirect 301 /database.php https://www.zzap.it/#/giochi
-Redirect 301 /gioco.php https://www.zzap.it/#/giochi
+Redirect 301 /bovabyte.php https://www.zzap.it/speciali/bovabyte
+Redirect 301 /elite.htm https://www.zzap.it/speciali/elitesystems
+Redirect 301 /konix.htm https://www.zzap.it/speciali/konixmultisystem
+Redirect 301 /storia.htm https://www.zzap.it/speciali/leabbiamovistetutte
+Redirect 301 /database.php https://www.zzap.it/giochi
+Redirect 301 /gioco.php https://www.zzap.it/giochi
 Redirect 301 /link.php https://www.zzap.it
-Redirect 301 /mappe.php https://www.zzap.it/#/mappe
-Redirect 301 /maps.php https://www.zzap.it/#/mappe
+Redirect 301 /mappe.php https://www.zzap.it/mappe
+Redirect 301 /maps.php https://www.zzap.it/mappe
 Redirect 301 /recensioni.php https://www.zzap.it
-Redirect 301 /search.php https://www.zzap.it/#/giochi
-Redirect 301 /speciali.php https://www.zzap.it/#/speciali
+Redirect 301 /search.php https://www.zzap.it/giochi
+Redirect 301 /speciali.php https://www.zzap.it/speciali
 Redirect 301 /rivista.php https://www.zzap.it
 Redirect 301 /Retroedicola-Speciale-Zzap.pdf https://www.zzap.it/assets/content/speciali/zzap-retroedicola/Retroedicola-Speciale-Zzap.pdf
 
@@ -22,14 +22,14 @@ Redirect 301 /Retroedicola-Speciale-Zzap.pdf https://www.zzap.it/assets/content/
 
 	# Redirect of pre 2018 pages to new ones
 	RewriteCond %{QUERY_STRING} ^numero=([0-9]+)$
-	RewriteRule ^scansioni\.php$ https://www.zzap.it/#/numero/%1? [R=301,L,NE]
+	RewriteRule ^scansioni\.php$ https://www.zzap.it/numero/%1? [R=301,L,NE]
 	RewriteCond %{QUERY_STRING} ^numero=([0-9]+)$
-	RewriteRule ^scansionidown\.php$ https://www.zzap.it/#/numero/%1? [R=301,L,NE]
+	RewriteRule ^scansionidown\.php$ https://www.zzap.it/numero/%1? [R=301,L,NE]
 
 	RewriteCond %{QUERY_STRING} ^album=([0-9]+).*$
-	RewriteRule ^explorer\.php$ https://www.zzap.it/#/numero/%1? [R=301,L,NE]
+	RewriteRule ^explorer\.php$ https://www.zzap.it/numero/%1? [R=301,L,NE]
 	RewriteCond %{QUERY_STRING} ^album=([0-9]+).*$
-	RewriteRule ^explorerpub\.php$ https://www.zzap.it/#/numero/%1? [R=301,L,NE]
+	RewriteRule ^explorerpub\.php$ https://www.zzap.it/numero/%1? [R=301,L,NE]
 
 	# Rewrite to HTTPS:
 	RewriteCond %{HTTPS} off
