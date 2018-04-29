@@ -1,5 +1,6 @@
 {
     "name": "Zzap!",
+    "short_name": "Zzap!",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",
