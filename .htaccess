@@ -4,6 +4,7 @@ Redirect 301 /phpBB2 https://www.zzap.it
 Redirect 301 /phpBB3 https://www.zzap.it
 Redirect 301 /bovabyte.php https://www.zzap.it/speciali/bovabyte
 Redirect 301 /elite.htm https://www.zzap.it/speciali/elitesystems
+Redirect 301 /home.php https://www.zzap.it
 Redirect 301 /konix.htm https://www.zzap.it/speciali/konixmultisystem
 Redirect 301 /storia.htm https://www.zzap.it/speciali/leabbiamovistetutte
 Redirect 301 /database.php https://www.zzap.it/giochi
@@ -26,14 +27,23 @@ Redirect 301 /Retroedicola-Speciale-Zzap.pdf https://www.zzap.it/assets/content/
 	RewriteCond %{QUERY_STRING} ^numero=([0-9]+)$
 	RewriteRule ^scansionidown\.php$ https://www.zzap.it/numero/%1? [R=301,L,NE]
 
-	RewriteCond %{QUERY_STRING} ^album=([0-9]+).*$
+	RewriteCond %{QUERY_STRING} ^album=([0-9]+)&immagine=([0-9]+)$
+	RewriteRule ^explorer\.php$ https://www.zzap.it/numero/%1/pagina/%2? [R=301,L,NE]
+	RewriteCond %{QUERY_STRING} ^album=([0-9]+)$
 	RewriteRule ^explorer\.php$ https://www.zzap.it/numero/%1? [R=301,L,NE]
-	RewriteCond %{QUERY_STRING} ^album=([0-9]+).*$
+	RewriteCond %{QUERY_STRING} ^album=([0-9]+)$
 	RewriteRule ^explorerpub\.php$ https://www.zzap.it/numero/%1? [R=301,L,NE]
 
-	# Rewrite to HTTPS:
-	RewriteCond %{HTTPS} off
-	RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+	RewriteCond %{QUERY_STRING} ^numero=([0-9]+)$
+	RewriteRule ^scansioni\.php$ https://www.zzap.it/numero/%1? [R=301,L,NE]
+	RewriteCond %{QUERY_STRING} ^numero=([0-9]+)$
+	RewriteRule ^scansionidown\.php$ https://www.zzap.it/numero/%1? [R=301,L,NE]
+
+	# Rewrite to HTTPS and add www:
+	RewriteCond %{HTTPS} off [OR]
+	RewriteCond %{HTTP_HOST} !^www\. [NC]
+	RewriteCond %{HTTP_HOST} ^(?:www\.)?(.+)$ [NC]
+	RewriteRule ^ https://www.%1%{REQUEST_URI} [L,NE,R=301]
 
 	# Main site is: /public
 	# RewriteCond %{REQUEST_URI} !^public
@@ -43,10 +53,19 @@ Redirect 301 /Retroedicola-Speciale-Zzap.pdf https://www.zzap.it/assets/content/
 </IfModule>
 
 <IfModule mod_deflate.c>
-	AddOutputFilterByType DEFLATE text/html text/plain text/css application/json
-	AddOutputFilterByType DEFLATE application/javascript
-	# Commented out as it seems could give problems in Windows 7: to be tested
+    AddOutputFilterByType DEFLATE text/html text/plain text/css application/json
+    AddOutputFilterByType DEFLATE application/javascript
+    # Commented out as it seems could give problems in Windows 7: to be tested
 	# AddOutputFilterByType DEFLATE text/xml application/xml text/x-component
-	AddOutputFilterByType DEFLATE application/xhtml+xml application/rss+xml application/atom+xml
-	AddOutputFilterByType DEFLATE image/x-icon image/svg+xml application/vnd.ms-fontobject application/x-font-ttf font/opentype
+    AddOutputFilterByType DEFLATE application/xhtml+xml application/rss+xml application/atom+xml
+    AddOutputFilterByType DEFLATE image/x-icon image/svg+xml application/vnd.ms-fontobject application/x-font-ttf font/opentype
 </Ifmodule>
+
+<IfModule mod_headers.c> 
+	Header set X-XSS-Protection "1; mode=block" 
+	Header set X-DNS-Prefetch-Control "off"
+	Header set X-Content-Type-Options "nosniff"
+	Header set X-Frame-Options "SAMEORIGIN"
+	Header set Strict-Transport-Security "max-age=15768000; includeSubDomains"
+	Header set Content-Security-Policy "script-src 'self' 'sha256-B9QF8kRcw2KMv/S+nfg54X6FmBpcmtsveNKR3dWc2Fk='; img-src * 'self' data: https:"
+</IfModule>
