@@ -67,5 +67,5 @@ Redirect 301 /Retroedicola-Speciale-Zzap.pdf https://www.zzap.it/assets/content/
 	Header set X-Content-Type-Options "nosniff"
 	Header set X-Frame-Options "SAMEORIGIN"
 	Header set Strict-Transport-Security "max-age=15768000; includeSubDomains"
-	Header set Content-Security-Policy "script-src 'self' 'sha256-B9QF8kRcw2KMv/S+nfg54X6FmBpcmtsveNKR3dWc2Fk='; img-src * 'self' data: https:"
+	Header set Content-Security-Policy "script-src 'self' 'sha256-uZAxgw9J6DsKoyzxqzqXN98Vkjdsr24Mk8+Pwuk8j/4='; img-src * 'self' data: https:"
 </IfModule>
